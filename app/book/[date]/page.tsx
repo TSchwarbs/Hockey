@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { DropOffWindow } from "@/lib/types";
-import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking";
+import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking-utils";
 
 interface Props {
   params: Promise<{ date: string }>;

@@ -8,7 +8,7 @@ import type { HollowDepth } from "@/lib/types";
 import type { DropOffWindow } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
-import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking";
+import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking-utils";
 
 export default function BookPage() {
   const { hollow, setHollow, setWindow } = useBooking();

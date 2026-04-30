@@ -1,5 +1,4 @@
 import { createServiceClient } from "@/lib/supabase/server";
-import { formatWindowDate, formatWindowHours } from "@/lib/booking";
 import type { DropOffWindow } from "@/lib/types";
 import WindowForm from "@/components/admin/WindowForm";
 import WindowRow from "@/components/admin/WindowRow";

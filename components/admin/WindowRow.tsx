@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatWindowDate, formatWindowHours } from "@/lib/booking";
+import { formatWindowDate, formatWindowHours } from "@/lib/booking-utils";
 import type { DropOffWindow } from "@/lib/types";
 
 export default function WindowRow({ window: win }: { window: DropOffWindow }) {

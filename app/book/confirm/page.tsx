@@ -6,7 +6,7 @@ import { useBooking } from "@/components/booking/BookingStore";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking";
+import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking-utils";
 import { DROP_BOX_ADDRESS } from "@/lib/constants";
 import type { DropOffWindow } from "@/lib/types";
 
