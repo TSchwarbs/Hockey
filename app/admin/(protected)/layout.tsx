@@ -11,22 +11,35 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!user) redirect("/admin/login");
 
   return (
-    <div className="min-h-screen bg-brand-bg">
-      <header className="bg-brand-navy text-white">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-background">
+      <header className="bg-surface-1 border-b border-border/50 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <span className="font-semibold">{BUSINESS_NAME}</span>
-            <nav className="flex gap-6 text-sm text-white/70">
-              <Link href="/admin/dashboard" className="hover:text-white transition-colors">Bookings</Link>
-              <Link href="/admin/windows" className="hover:text-white transition-colors">Windows</Link>
+            <span className="font-display text-xl tracking-widest text-text-primary">
+              {BUSINESS_NAME}
+            </span>
+            <nav className="flex gap-1">
+              <AdminNavLink href="/admin/dashboard">Bookings</AdminNavLink>
+              <AdminNavLink href="/admin/windows">Windows</AdminNavLink>
             </nav>
           </div>
           <AdminSignOutButton />
         </div>
       </header>
-      <main className="max-w-6xl mx-auto px-6 py-10">
+      <main className="max-w-7xl mx-auto px-6 py-10">
         {children}
       </main>
     </div>
+  );
+}
+
+function AdminNavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="font-mono text-[11px] uppercase tracking-widest text-muted-text hover:text-text-primary hover:bg-surface-2 px-3 py-1.5 rounded-lg transition-all duration-200"
+    >
+      {children}
+    </Link>
   );
 }

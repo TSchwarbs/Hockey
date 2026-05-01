@@ -3,9 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useBooking } from "@/components/booking/BookingStore";
-import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Separator } from "@/components/ui/separator";
 import { formatWindowDate, formatWindowHours, getPickupDate } from "@/lib/booking-utils";
 import { DROP_BOX_ADDRESS } from "@/lib/constants";
 import type { DropOffWindow } from "@/lib/types";
@@ -19,7 +16,6 @@ export default function ConfirmPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Guard: redirect if state is incomplete
   useEffect(() => {
     if (!hollow || !windowId || !windowDate || !customerName || !customerEmail || !customerPhone) {
       router.replace("/book");
@@ -64,71 +60,110 @@ export default function ConfirmPage() {
   if (!hollow || !windowId) return null;
 
   return (
-    <div>
-      <p className="text-brand-steel text-sm font-medium tracking-widest uppercase mb-2">
-        Step 3 of 3
-      </p>
-      <h1 className="text-3xl font-bold text-brand-navy mb-8">Review your booking</h1>
+    <div className="animate-fade-up">
+      {/* Step header */}
+      <div className="mb-8">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ice mb-3">
+          Step 3 of 3
+        </p>
+        <h1 className="font-display text-[56px] leading-tight uppercase text-text-primary">
+          Review Your Order
+        </h1>
+      </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl divide-y divide-gray-100 mb-6">
-        <Row label="Service" value="Standard Skate Sharpening" />
-        <Row label="Hollow depth" value={hollow} mono />
-        {window_ && (
-          <>
-            <Row
-              label="Drop-off date"
-              value={formatWindowDate(window_.date)}
-            />
-            <Row
-              label="Drop-off window"
-              value={formatWindowHours(window_.open_time, window_.close_time)}
-            />
-            <Row label="Pickup" value={getPickupDate(window_.date)} />
-          </>
-        )}
-        <Row label="Drop box" value={DROP_BOX_ADDRESS} />
+      {/* Main review card */}
+      <div className="bg-surface-1 rounded-2xl border border-border/60 overflow-hidden mb-6">
+        {/* Top accent */}
+        <div className="h-px bg-gradient-to-r from-ice/50 via-ice/15 to-transparent" />
 
-        <div className="px-5 py-4">
-          <p className="text-xs text-brand-steel uppercase tracking-widest mb-2 font-medium">Your info</p>
-          <Separator className="mb-3" />
-          <div className="space-y-1 text-sm text-brand-navy">
-            <p>{customerName}</p>
-            <p>{customerEmail}</p>
-            <p>{customerPhone}</p>
-            {notes && <p className="text-brand-steel">{notes}</p>}
+        {/* Hollow depth — big display */}
+        <div className="text-center py-8 border-b border-border/40">
+          <span className="font-display text-[64px] leading-none text-ice">{hollow}</span>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-text mt-1">
+            Hollow Depth
+          </p>
+        </div>
+
+        {/* Line items */}
+        <div className="divide-y divide-border/30">
+          <ReviewRow label="Service" value="Standard Skate Sharpening" />
+          {window_ && (
+            <>
+              <ReviewRow label="Drop-off Date" value={formatWindowDate(window_.date)} />
+              <ReviewRow
+                label="Drop-off Window"
+                value={formatWindowHours(window_.open_time, window_.close_time)}
+                mono
+              />
+              <ReviewRow label="Pickup Date" value={getPickupDate(window_.date)} />
+            </>
+          )}
+          <ReviewRow label="Drop Box" value={DROP_BOX_ADDRESS} />
+        </div>
+
+        {/* Customer info block */}
+        <div className="px-6 py-5 bg-surface-2/50">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-text mb-3">
+            Your Info
+          </p>
+          <div className="space-y-1">
+            <p className="text-text-primary text-sm">{customerName}</p>
+            <p className="text-muted-text text-sm font-mono">{customerEmail}</p>
+            <p className="text-muted-text text-sm font-mono">{customerPhone}</p>
+            {notes && (
+              <p className="text-muted-text/70 text-xs mt-2 pt-2 border-t border-border/30 leading-relaxed">
+                {notes}
+              </p>
+            )}
           </div>
         </div>
       </div>
 
+      {/* Error */}
       {error && (
-        <Alert variant="destructive" className="mb-4">
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
+        <div className="bg-danger/10 border border-danger/30 rounded-xl p-4 mb-4 text-danger text-sm font-mono">
+          {error}
+        </div>
       )}
 
-      <Button
+      {/* CTA */}
+      <button
         onClick={handleConfirm}
         disabled={submitting}
-        className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white py-6 text-base font-semibold mb-3"
+        className="w-full h-14 rounded-full bg-ice text-background font-semibold text-base hover:bg-white hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none cursor-pointer flex items-center justify-center gap-3 mb-3"
       >
-        {submitting ? "Confirming…" : "Confirm booking"}
-      </Button>
+        {submitting ? (
+          <>
+            <span
+              className="w-5 h-5 rounded-full border-2 border-background/30 border-t-background animate-spin-arc"
+              style={{ borderTopColor: "#080C10" }}
+            />
+            Confirming…
+          </>
+        ) : (
+          "Confirm Booking"
+        )}
+      </button>
 
       <button
         onClick={() => router.back()}
-        className="w-full text-brand-steel text-sm hover:text-brand-navy transition-colors py-2"
+        className="w-full font-mono text-[11px] uppercase tracking-widest text-muted-text hover:text-steel transition-colors duration-200 py-2 cursor-pointer"
       >
-        ← Go back
+        ← Go Back
       </button>
     </div>
   );
 }
 
-function Row({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
+function ReviewRow({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
-    <div className="px-5 py-4 flex justify-between items-baseline gap-4">
-      <span className="text-brand-steel text-sm flex-shrink-0">{label}</span>
-      <span className={`text-brand-navy text-sm font-medium text-right ${mono ? "font-mono" : ""}`}>
+    <div className="flex items-baseline justify-between gap-4 px-6 py-4">
+      <span className="font-mono text-[10px] uppercase tracking-widest text-muted-text flex-shrink-0">
+        {label}
+      </span>
+      <span
+        className={`text-text-primary text-sm text-right ${mono ? "font-mono text-ice" : ""}`}
+      >
         {value}
       </span>
     </div>
