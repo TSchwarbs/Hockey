@@ -15,7 +15,7 @@ export async function GET(req: Request): Promise<NextResponse<ApiResponse<{ sent
 
   const { data: bookings, error } = await supabase
     .from("bookings")
-    .select("*, drop_off_windows(*)")
+    .select("*, drop_off_windows!inner(*)")
     .eq("status", "confirmed")
     .eq("reminder_sent", false)
     .eq("drop_off_windows.date", today);

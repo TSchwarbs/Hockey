@@ -12,7 +12,7 @@ async function getUpcomingBookings(): Promise<BookingWithWindow[]> {
 
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, drop_off_windows(*)")
+    .select("*, drop_off_windows!inner(*)")
     .gte("drop_off_windows.date", today)
     .order("created_at", { ascending: false });
 
