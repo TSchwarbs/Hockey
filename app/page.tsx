@@ -7,7 +7,7 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col bg-background">
       {/* ── Nav ─────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           <span className="font-display text-xl tracking-widest text-foreground">
             {BUSINESS_NAME}
           </span>
@@ -41,7 +41,7 @@ export default function LandingPage() {
           />
 
           {/* Hero content — hardcoded white text over dark photo */}
-          <div className="relative z-10 max-w-5xl mx-auto px-6 w-full">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
             <div className="max-w-lg">
               <p className="text-xs uppercase tracking-[0.2em] text-white/55 font-sans mb-5 animate-fade-up">
                 Professional Skate Sharpening
@@ -84,7 +84,7 @@ export default function LandingPage() {
 
         {/* ── How it works ─────────────────────────────────────────── */}
         <section className="py-24 px-6 bg-card">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="font-display text-[44px] text-foreground uppercase tracking-wide mb-12">
               How It Works
             </h2>
@@ -114,7 +114,7 @@ export default function LandingPage() {
 
         {/* ── Hollow depth ─────────────────────────────────────────── */}
         <section className="py-24 px-6 bg-background">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="font-display text-[44px] text-foreground uppercase tracking-wide mb-3">
               Choose Your Hollow
             </h2>
@@ -165,7 +165,7 @@ export default function LandingPage() {
 
       {/* ── Footer ─────────────────────────────────────────────────── */}
       <footer className="bg-background border-t border-border py-7 px-6">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="font-display text-lg tracking-widest text-foreground">
             {BUSINESS_NAME}
           </span>
