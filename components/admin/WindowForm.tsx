@@ -59,44 +59,53 @@ export default function WindowForm({ existingId }: { existingId?: string }) {
       )}
 
       <div>
-        <Label htmlFor="date">Date</Label>
+        <Label htmlFor="date" className="text-xs uppercase tracking-wider text-muted-foreground">
+          Date
+        </Label>
         <Input
           id="date"
           type="date"
           required
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="mt-1"
+          className="mt-1.5 bg-secondary border-border text-foreground focus-visible:ring-1 focus-visible:ring-primary"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <Label htmlFor="open_time">Opens</Label>
+          <Label htmlFor="open_time" className="text-xs uppercase tracking-wider text-muted-foreground">
+            Opens
+          </Label>
           <Input
             id="open_time"
             type="time"
             required
             value={openTime}
             onChange={(e) => setOpenTime(e.target.value)}
-            className="mt-1"
+            className="mt-1.5 bg-secondary border-border text-foreground focus-visible:ring-1 focus-visible:ring-primary"
           />
         </div>
         <div>
-          <Label htmlFor="close_time">Closes</Label>
+          <Label htmlFor="close_time" className="text-xs uppercase tracking-wider text-muted-foreground">
+            Closes
+          </Label>
           <Input
             id="close_time"
             type="time"
             required
             value={closeTime}
             onChange={(e) => setCloseTime(e.target.value)}
-            className="mt-1"
+            className="mt-1.5 bg-secondary border-border text-foreground focus-visible:ring-1 focus-visible:ring-primary"
           />
         </div>
       </div>
 
       <div>
-        <Label htmlFor="max">Max bookings <span className="text-brand-steel font-normal">(leave blank for unlimited)</span></Label>
+        <Label htmlFor="max" className="text-xs uppercase tracking-wider text-muted-foreground">
+          Max bookings{" "}
+          <span className="text-muted-foreground/60 normal-case tracking-normal">(leave blank for unlimited)</span>
+        </Label>
         <Input
           id="max"
           type="number"
@@ -104,14 +113,14 @@ export default function WindowForm({ existingId }: { existingId?: string }) {
           value={maxBookings}
           onChange={(e) => setMaxBookings(e.target.value)}
           placeholder="Unlimited"
-          className="mt-1"
+          className="mt-1.5 bg-secondary border-border text-foreground focus-visible:ring-1 focus-visible:ring-primary"
         />
       </div>
 
       <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-brand-navy hover:bg-brand-navy/90 text-white"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
       >
         {loading ? "Saving…" : existingId ? "Update window" : "Add window"}
       </Button>

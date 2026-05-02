@@ -57,16 +57,16 @@ export default function DateFormPage({ params }: Props) {
   if (loading) {
     return (
       <div className="space-y-4 animate-fade-up">
-        <Skeleton className="h-10 w-48 rounded-xl" />
-        <Skeleton className="h-24 w-full rounded-2xl" />
-        <Skeleton className="h-64 w-full rounded-2xl" />
+        <Skeleton className="h-8 w-40 rounded-lg" />
+        <Skeleton className="h-20 w-full rounded-xl" />
+        <Skeleton className="h-56 w-full rounded-xl" />
       </div>
     );
   }
 
   if (error || !window_) {
     return (
-      <div className="bg-danger/10 border border-danger/30 rounded-2xl p-5 text-danger text-sm font-mono">
+      <div className="bg-destructive/8 border border-destructive/25 rounded-xl p-5 text-destructive text-sm">
         {error ?? "Drop-off window not found."}
       </div>
     );
@@ -76,32 +76,32 @@ export default function DateFormPage({ params }: Props) {
     <div className="animate-fade-up">
       {/* Step header */}
       <div className="mb-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ice mb-3">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2.5">
           Step 2 of 3
         </p>
-        <h1 className="font-display text-[48px] leading-tight uppercase text-text-primary">
+        <h1 className="text-2xl font-semibold text-foreground">
           Your Details
         </h1>
       </div>
 
-      {/* Window summary card */}
-      <div className="bg-surface-2 rounded-2xl border border-ice/20 p-5 mb-8">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-text mb-3">
+      {/* Window summary */}
+      <div className="bg-card rounded-xl border border-primary/20 p-5 mb-7">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2.5">
           Drop-off window
         </p>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-text-primary font-medium">{formatWindowDate(window_.date)}</p>
-            <p className="font-mono text-ice text-sm mt-1">
+            <p className="text-foreground font-medium text-sm">{formatWindowDate(window_.date)}</p>
+            <p className="text-primary text-sm mt-1 font-mono">
               {formatWindowHours(window_.open_time, window_.close_time)}
             </p>
-            <p className="font-mono text-muted-text text-xs mt-2">
+            <p className="text-muted-foreground text-xs mt-1.5 font-mono">
               Pickup: {getPickupDate(window_.date)}
             </p>
           </div>
           <button
             onClick={() => router.push("/book")}
-            className="font-mono text-[10px] uppercase tracking-widest text-muted-text hover:text-ice border border-border/60 hover:border-ice/40 rounded-lg px-3 py-1.5 transition-all duration-200 cursor-pointer flex-shrink-0"
+            className="text-xs text-muted-foreground hover:text-foreground border border-border hover:border-border/80 rounded-lg px-3 py-1.5 transition-all duration-150 cursor-pointer flex-shrink-0"
           >
             Change
           </button>
@@ -141,12 +141,12 @@ export default function DateFormPage({ params }: Props) {
         />
 
         {/* Notes */}
-        <div className="relative">
+        <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <label htmlFor="notes" className="font-mono text-[11px] uppercase tracking-widest text-muted-text">
+            <label htmlFor="notes" className="text-xs uppercase tracking-wider text-muted-foreground">
               Notes
             </label>
-            <span className="font-mono text-[9px] uppercase tracking-wider text-muted-text/50 bg-surface-2 px-2 py-0.5 rounded-full border border-border/40">
+            <span className="text-[10px] text-muted-foreground/60 bg-secondary px-2 py-0.5 rounded-full">
               Optional
             </span>
           </div>
@@ -154,18 +154,18 @@ export default function DateFormPage({ params }: Props) {
             id="notes"
             value={notes}
             onChange={(e) => setCustomerFields({ notes: e.target.value })}
-            placeholder='e.g. two pairs of skates, both 1/2" please'
+            placeholder='e.g. two pairs of skates, both 1/2"'
             rows={3}
-            className="resize-none bg-surface-1 border-border/60 text-text-primary placeholder:text-muted-text/40 focus-visible:border-ice/60 focus-visible:ring-0 focus-visible:shadow-[0_0_0_3px_rgba(0,212,255,0.15)] transition-all duration-200 rounded-xl text-sm font-sans"
+            className="resize-none bg-card border-border text-foreground placeholder:text-muted-foreground/40 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary transition-all duration-150 rounded-xl text-sm"
           />
         </div>
 
         <button
           type="submit"
           disabled={!customerName || !customerEmail || !customerPhone}
-          className="w-full h-14 rounded-full bg-ice text-background font-semibold text-base hover:bg-white hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+          className="w-full h-12 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 hover:-translate-y-px transition-all duration-150 disabled:opacity-35 disabled:pointer-events-none cursor-pointer"
         >
-          Continue → Review Booking
+          Continue to Review
         </button>
       </form>
     </div>
@@ -199,22 +199,22 @@ function FloatField({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           onChange={(e) => onChange(e.target.value)}
-          className="peer w-full h-14 bg-surface-1 border border-border/60 rounded-xl px-4 pt-4 pb-1 text-text-primary text-sm font-sans outline-none transition-all duration-200 focus:border-ice/60 focus:shadow-[0_0_0_3px_rgba(0,212,255,0.15)] placeholder:text-transparent"
+          className="peer w-full h-14 bg-card border border-border rounded-xl px-4 pt-5 pb-1 text-foreground text-sm outline-none transition-all duration-150 focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-transparent"
           placeholder={label}
         />
         <label
           htmlFor={id}
-          className={`absolute left-4 pointer-events-none transition-all duration-150 origin-left font-mono uppercase tracking-widest ${
+          className={`absolute left-4 pointer-events-none transition-all duration-150 origin-left uppercase tracking-wider ${
             lifted
-              ? "top-2 text-[9px] text-ice/70"
-              : "top-[17px] text-[11px] text-muted-text"
+              ? "top-2 text-[9px] text-primary"
+              : "top-[18px] text-[11px] text-muted-foreground"
           }`}
         >
           {label}
         </label>
       </div>
       {hint && (
-        <p className="mt-1.5 text-muted-text/60 text-xs font-mono">{hint}</p>
+        <p className="mt-1.5 text-muted-foreground/65 text-xs">{hint}</p>
       )}
     </div>
   );

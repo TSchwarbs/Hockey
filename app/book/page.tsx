@@ -24,9 +24,9 @@ export default function BookPage() {
       .then((r) => r.json())
       .then((json) => {
         if (json.success) setWindows(json.data);
-        else setWindowsError("Could not load available dates.");
+        else setWindowsError("Could not load available dates. Please refresh and try again.");
       })
-      .catch(() => setWindowsError("Could not load available dates."))
+      .catch(() => setWindowsError("Could not load available dates. Please refresh and try again."))
       .finally(() => setLoadingWindows(false));
   }, [hollow]);
 
@@ -42,21 +42,21 @@ export default function BookPage() {
   return (
     <div className="animate-fade-up">
       {/* Step header */}
-      <div className="mb-10">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ice mb-3">
+      <div className="mb-9">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2.5">
           Step 1 of 3
         </p>
-        <h1 className="font-display text-[48px] leading-tight uppercase text-text-primary mb-3">
+        <h1 className="text-2xl font-semibold text-foreground mb-2">
           Book Your Drop-Off
         </h1>
-        <p className="text-muted-text">
+        <p className="text-sm text-muted-foreground">
           Choose your hollow depth, then pick an available drop-off date.
         </p>
       </div>
 
       {/* Hollow depth selection */}
-      <section className="mb-10">
-        <h2 className="font-mono text-[11px] uppercase tracking-widest text-muted-text mb-4">
+      <section className="mb-9">
+        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
           Hollow Depth
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -74,26 +74,24 @@ export default function BookPage() {
       {/* Date selection — appears after hollow is chosen */}
       {hollow && (
         <section>
-          <h2 className="font-mono text-[11px] uppercase tracking-widest text-muted-text mb-4">
+          <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
             Drop-Off Date
           </h2>
 
           {loadingWindows && (
-            <div className="space-y-3">
-              <Skeleton className="h-72 w-full rounded-2xl" />
-            </div>
+            <Skeleton className="h-72 w-full rounded-xl" />
           )}
 
           {windowsError && (
-            <p className="text-danger text-sm font-mono">{windowsError}</p>
+            <p className="text-destructive text-sm">{windowsError}</p>
           )}
 
           {!loadingWindows && !windowsError && windows.length === 0 && (
-            <div className="bg-surface-1 rounded-2xl border border-border/60 p-8 text-center">
-              <p className="text-muted-text text-sm">
-                No drop-off windows are available in the next 14 days.
+            <div className="bg-card rounded-xl border border-border p-8 text-center">
+              <p className="text-muted-foreground text-sm">
+                No drop-off windows available in the next 14 days.
               </p>
-              <p className="text-muted-text/60 text-xs mt-2 font-mono">Check back soon.</p>
+              <p className="text-muted-foreground/60 text-xs mt-1.5">Check back soon.</p>
             </div>
           )}
 
@@ -119,15 +117,14 @@ function HollowCard({
     <button
       onClick={onSelect}
       className={cn(
-        "relative text-left rounded-2xl border p-6 transition-all duration-200 group cursor-pointer overflow-hidden",
+        "relative text-left rounded-xl border p-5 transition-all duration-150 cursor-pointer",
         selected
-          ? "border-ice bg-ice/8 shadow-[0_0_0_1px_rgba(0,212,255,0.5),0_0_20px_rgba(0,212,255,0.08)]"
-          : "border-border/60 bg-surface-1 hover:border-ice/40 hover:-translate-y-0.5"
+          ? "border-primary bg-primary/5 ring-1 ring-primary"
+          : "border-border bg-card hover:border-primary/40 hover:bg-card"
       )}
     >
-      {/* Selected badge */}
       {selected && (
-        <span className="absolute top-3 right-3 flex items-center gap-1 bg-ice text-background text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full">
+        <span className="absolute top-3 right-3 flex items-center gap-1 bg-primary text-primary-foreground text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full">
           <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden>
             <path d="M1.5 4l2 2 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -135,23 +132,13 @@ function HollowCard({
         </span>
       )}
 
-      {/* Hover glow */}
-      <div
-        className={cn(
-          "absolute inset-0 pointer-events-none transition-opacity duration-200",
-          selected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-        )}
-        style={{ background: "linear-gradient(135deg, rgba(0,212,255,0.05) 0%, transparent 60%)" }}
-      />
-
-      <div className="relative z-10">
-        <p className={cn("font-display text-[48px] leading-none mb-3 transition-colors duration-200",
-          selected ? "text-ice" : "text-text-primary group-hover:text-ice/80"
-        )}>
-          {option.label}
-        </p>
-        <p className="text-muted-text text-xs leading-relaxed">{option.description}</p>
-      </div>
+      <p className={cn(
+        "font-display text-[44px] leading-none mb-2 transition-colors duration-150",
+        selected ? "text-primary" : "text-foreground"
+      )}>
+        {option.label}
+      </p>
+      <p className="text-muted-foreground text-xs leading-relaxed">{option.description}</p>
     </button>
   );
 }

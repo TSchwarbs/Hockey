@@ -4,26 +4,25 @@ import { BUSINESS_NAME, DROP_BOX_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, HOLLOW_O
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-background">
       {/* ── Nav ─────────────────────────────────────────────────── */}
-      <header className="absolute top-0 left-0 right-0 z-20">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-          <span className="font-display text-2xl tracking-widest text-text-primary">
+      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <span className="font-display text-xl tracking-widest text-foreground">
             {BUSINESS_NAME}
           </span>
           <Link
             href="/admin/dashboard"
-            className="text-muted-text text-xs font-mono tracking-widest uppercase hover:text-steel transition-colors duration-200"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-150"
           >
-            Admin ↗
+            Admin
           </Link>
         </div>
       </header>
 
       <main className="flex-1">
         {/* ── Hero ────────────────────────────────────────────────── */}
-        <section className="relative min-h-screen flex items-center overflow-hidden grain-overlay">
-          {/* Hero photo */}
+        <section className="relative h-[calc(100svh-56px)] flex items-center overflow-hidden">
           <Image
             src="/images/hero/hockey_player.avif"
             alt=""
@@ -32,93 +31,64 @@ export default function LandingPage() {
             className="object-cover object-center"
           />
 
-          {/* Directional overlay — deep on the left where text lives, opens up on the right */}
+          {/* Overlay: deep on the left, opens right */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(100deg, rgba(8,12,16,0.92) 0%, rgba(8,12,16,0.72) 45%, rgba(8,12,16,0.35) 100%)",
+                "linear-gradient(105deg, rgba(12,14,18,0.90) 0%, rgba(12,14,18,0.65) 50%, rgba(12,14,18,0.25) 100%)",
             }}
           />
 
-          {/* Bottom vignette so the scroll hint stays legible */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-            style={{
-              background: "linear-gradient(to top, rgba(8,12,16,0.6) 0%, transparent 100%)",
-            }}
-          />
-
-          {/* Ice-blue atmospheric glow top-right */}
-          <div
-            className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 65%)",
-            }}
-          />
-
-          {/* Hero content */}
-          <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-24">
-            <div className="max-w-xl">
-              <p
-                className="font-mono text-ice text-xs tracking-[0.25em] uppercase mb-6 animate-fade-up"
-                style={{ animationDelay: "0.1s" }}
-              >
-                Performance-Grade Precision
+          {/* Hero content — hardcoded white text over dark photo */}
+          <div className="relative z-10 max-w-5xl mx-auto px-6 w-full">
+            <div className="max-w-lg">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/55 font-sans mb-5 animate-fade-up">
+                Professional Skate Sharpening
               </p>
               <h1
-                className="font-display text-[clamp(64px,10vw,96px)] leading-[0.92] text-text-primary uppercase mb-8 animate-fade-up"
-                style={{ animationDelay: "0.2s" }}
+                className="font-display text-[clamp(60px,10vw,96px)] leading-[0.9] text-white uppercase mb-7 animate-fade-up"
+                style={{ animationDelay: "0.1s" }}
               >
                 RAZOR
                 <br />
-                <span className="text-ice">SHARP.</span>
+                SHARP.
                 <br />
                 EVERY
                 <br />
                 SKATE.
               </h1>
               <p
-                className="text-steel text-lg leading-relaxed mb-10 max-w-md animate-fade-up"
-                style={{ animationDelay: "0.35s" }}
+                className="text-white/70 text-base leading-relaxed mb-9 max-w-sm animate-fade-up"
+                style={{ animationDelay: "0.2s" }}
               >
-                Professional hollow sharpening. Drop off tonight. Skate tomorrow.
+                Hollow sharpening done right. Drop off tonight, skate tomorrow.
               </p>
               <div
                 className="animate-fade-up"
-                style={{ animationDelay: "0.45s" }}
+                style={{ animationDelay: "0.3s" }}
               >
                 <Link
                   href="/book"
-                  className="inline-flex items-center gap-3 bg-ice text-background font-semibold text-base px-8 h-14 rounded-full transition-all duration-200 hover:bg-white hover:-translate-y-0.5 animate-glow-pulse cursor-pointer select-none"
+                  className="inline-flex items-center gap-2.5 bg-white text-gray-900 font-semibold text-sm px-7 h-12 rounded-full transition-all duration-150 hover:bg-white/90 hover:-translate-y-px select-none"
                 >
                   Book Your Sharpening
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                    <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Link>
               </div>
             </div>
           </div>
-
-          {/* Scroll hint */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 animate-fade-up" style={{ animationDelay: "1s" }}>
-            <div className="w-px h-10 bg-gradient-to-b from-transparent to-steel" />
-            <span className="font-mono text-[10px] tracking-widest uppercase text-muted-text">Scroll</span>
-          </div>
         </section>
 
         {/* ── How it works ─────────────────────────────────────────── */}
-        <section className="py-28 px-6 bg-surface-1">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-baseline gap-4 mb-16">
-              <h2 className="font-display text-[48px] text-text-primary uppercase tracking-wide">
-                How It Works
-              </h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
+        <section className="py-24 px-6 bg-card">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="font-display text-[44px] text-foreground uppercase tracking-wide mb-12">
+              How It Works
+            </h2>
+            <div className="grid md:grid-cols-3 gap-5">
               {[
                 {
                   n: "1",
@@ -142,59 +112,51 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── Hollow depth section ──────────────────────────────────── */}
-        <section className="py-28 px-6 bg-background">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-baseline gap-4 mb-4">
-              <h2 className="font-display text-[48px] text-text-primary uppercase tracking-wide">
-                Choose Your Hollow
-              </h2>
-            </div>
-            <p className="text-muted-text mb-14 max-w-lg">
-              The hollow depth is the concave groove ground into the blade&apos;s base. Deeper hollows grip more; shallower ones glide faster.
+        {/* ── Hollow depth ─────────────────────────────────────────── */}
+        <section className="py-24 px-6 bg-background">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="font-display text-[44px] text-foreground uppercase tracking-wide mb-3">
+              Choose Your Hollow
+            </h2>
+            <p className="text-muted-foreground mb-12 max-w-md text-sm leading-relaxed">
+              The hollow is the concave groove ground into the blade base. Deeper hollows grip more; shallower ones glide faster.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-3 gap-4">
               {HOLLOW_OPTIONS.map((option, i) => (
                 <HollowCard key={option.value} option={option} index={i} />
               ))}
             </div>
 
-            <div className="mt-12 pt-8 border-t border-border/50">
-              <p className="text-muted-text text-sm">
+            <div className="mt-10 pt-8 border-t border-border">
+              <p className="text-muted-foreground text-sm">
                 Not sure which hollow to choose?{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-ice hover:underline transition-colors">
-                  Ask us — we&apos;ll help you decide.
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-foreground underline underline-offset-2 hover:text-primary transition-colors">
+                  Ask us.
                 </a>
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── CTA banner ────────────────────────────────────────────── */}
-        <section className="py-28 px-6 bg-surface-1 relative overflow-hidden">
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: "radial-gradient(ellipse at 50% 100%, rgba(0,212,255,0.07) 0%, transparent 70%)",
-            }}
-          />
-          <div className="relative z-10 max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-[clamp(48px,6vw,72px)] text-text-primary uppercase leading-tight mb-6">
+        {/* ── CTA ──────────────────────────────────────────────────── */}
+        <section className="py-24 px-6 bg-card">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="font-display text-[clamp(44px,6vw,68px)] text-foreground uppercase leading-tight mb-5">
               Drop Off Tonight.
               <br />
-              <span className="text-ice">Skate Tomorrow.</span>
+              Skate Tomorrow.
             </h2>
-            <p className="text-muted-text text-lg mb-10 max-w-md mx-auto">
+            <p className="text-muted-foreground text-base mb-9">
               Takes less than two minutes to book your drop-off slot.
             </p>
             <Link
               href="/book"
-              className="inline-flex items-center gap-3 bg-ice text-background font-semibold text-base px-8 h-14 rounded-full transition-all duration-200 hover:bg-white hover:-translate-y-0.5 cursor-pointer select-none"
+              className="inline-flex items-center gap-2.5 bg-primary text-primary-foreground font-semibold text-sm px-7 h-12 rounded-full transition-all duration-150 hover:bg-primary/90 hover:-translate-y-px select-none"
             >
               Reserve Your Spot
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
           </div>
@@ -202,17 +164,17 @@ export default function LandingPage() {
       </main>
 
       {/* ── Footer ─────────────────────────────────────────────────── */}
-      <footer className="bg-background border-t border-border/50 py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="font-display text-xl tracking-widest text-text-primary">
+      <footer className="bg-background border-t border-border py-7 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span className="font-display text-lg tracking-widest text-foreground">
             {BUSINESS_NAME}
           </span>
-          <div className="flex gap-6 font-mono text-xs tracking-wider text-muted-text">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-xs text-muted-foreground">
             <span>{DROP_BOX_ADDRESS}</span>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-steel transition-colors">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-foreground transition-colors">
               {CONTACT_EMAIL}
             </a>
-            <a href={`tel:${CONTACT_PHONE}`} className="hover:text-steel transition-colors">
+            <a href={`tel:${CONTACT_PHONE}`} className="hover:text-foreground transition-colors">
               {CONTACT_PHONE}
             </a>
           </div>
@@ -226,26 +188,14 @@ export default function LandingPage() {
 
 function HowItWorksCard({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div className="relative bg-surface-2 rounded-2xl p-7 border border-border/60 overflow-hidden group hover:border-ice/30 transition-all duration-200">
-      {/* Watermark number */}
-      <span
-        className="absolute -top-2 -right-2 font-display text-[120px] leading-none text-text-primary select-none pointer-events-none"
-        style={{ opacity: 0.055 }}
-        aria-hidden
-      >
-        {n}
-      </span>
-      {/* Step dot */}
-      <div className="flex items-center gap-2 mb-5">
-        <div className="w-1.5 h-1.5 rounded-full bg-ice" />
-        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-text">
-          Step {n}
+    <div className="bg-background rounded-xl border border-border p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex items-center justify-center flex-shrink-0">
+          {n}
         </span>
+        <h3 className="font-semibold text-foreground text-sm">{title}</h3>
       </div>
-      <h3 className="font-display text-[24px] text-text-primary uppercase tracking-wide mb-3">
-        {title}
-      </h3>
-      <p className="text-muted-text text-sm leading-relaxed">{body}</p>
+      <p className="text-muted-foreground text-sm leading-relaxed">{body}</p>
     </div>
   );
 }
@@ -258,20 +208,12 @@ function HollowCard({
   index: number;
 }) {
   return (
-    <div
-      className="group relative bg-surface-1 rounded-2xl border border-border/60 p-8 overflow-hidden hover:border-ice/40 hover:-translate-y-1 transition-all duration-200 cursor-default"
-    >
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
-        style={{ background: "linear-gradient(135deg, rgba(0,212,255,0.04) 0%, transparent 60%)" }}
-      />
-      <div className="relative z-10">
-        <span className="font-mono text-[11px] uppercase tracking-widest text-muted-text mb-4 block">
-          {index === 0 ? "Deep Grip" : index === 1 ? "Balanced" : "Fast Glide"}
-        </span>
-        <p className="font-display text-[56px] leading-none text-ice mb-4">{option.label}</p>
-        <p className="text-muted-text text-sm leading-relaxed">{option.description}</p>
-      </div>
+    <div className="bg-card rounded-xl border border-border p-7 hover:border-primary/40 transition-colors duration-150">
+      <span className="text-xs uppercase tracking-widest text-muted-foreground mb-3 block">
+        {index === 0 ? "Deep Grip" : index === 1 ? "Balanced" : "Fast Glide"}
+      </span>
+      <p className="font-display text-[52px] leading-none text-primary mb-3">{option.label}</p>
+      <p className="text-muted-foreground text-sm leading-relaxed">{option.description}</p>
     </div>
   );
 }

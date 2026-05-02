@@ -22,33 +22,30 @@ export default function BookingSummary() {
   }, [windowDate]);
 
   return (
-    <div className="sticky top-6 bg-surface-2 rounded-2xl border border-t-ice/40 border-x-border/50 border-b-border/50 overflow-hidden">
-      {/* Top accent stripe */}
-      <div className="h-px bg-gradient-to-r from-ice/60 via-ice/20 to-transparent" />
-
-      <div className="p-6">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-text mb-5">
+    <div className="sticky top-20 bg-card rounded-xl border border-border overflow-hidden">
+      <div className="p-5">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-4">
           Order Summary
         </p>
 
         {!hollow ? (
-          <p className="text-muted-text text-sm">
+          <p className="text-muted-foreground text-sm">
             Select your hollow depth to begin.
           </p>
         ) : (
           <>
-            {/* Big hollow display */}
-            <div className="text-center py-5 mb-5 border-b border-border/40">
-              <span className="font-display text-[72px] leading-none text-ice">
+            {/* Hollow display */}
+            <div className="text-center py-5 mb-4 border-b border-border">
+              <span className="font-display text-[64px] leading-none text-primary">
                 {hollow}
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-text mt-1">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1">
                 Hollow Depth
               </p>
             </div>
 
             {/* Line items */}
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <SummaryRow label="Service" value="Standard Sharpening" />
               {win ? (
                 <>
@@ -75,23 +72,13 @@ export default function BookingSummary() {
   );
 }
 
-function SummaryRow({
-  label,
-  value,
-  mono,
-}: {
-  label: string;
-  value: string;
-  mono?: boolean;
-}) {
+function SummaryRow({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-muted-text flex-shrink-0">
+      <span className="text-[11px] uppercase tracking-wider text-muted-foreground flex-shrink-0">
         {label}
       </span>
-      <span
-        className={`text-text-primary text-xs text-right leading-relaxed ${mono ? "font-mono" : ""}`}
-      >
+      <span className={`text-foreground text-xs text-right leading-relaxed ${mono ? "font-mono" : ""}`}>
         {value}
       </span>
     </div>

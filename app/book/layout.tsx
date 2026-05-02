@@ -8,11 +8,11 @@ export default function BookLayout({ children }: { children: React.ReactNode }) 
     <BookingProvider>
       <div className="min-h-screen bg-background flex flex-col">
         {/* Header */}
-        <header className="border-b border-border/50 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <header className="border-b border-border bg-background sticky top-0 z-10">
+          <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
             <Link
               href="/"
-              className="font-display text-xl tracking-widest text-text-primary hover:text-ice transition-colors duration-200"
+              className="font-display text-xl tracking-widest text-foreground hover:text-primary transition-colors duration-150"
             >
               {BUSINESS_NAME}
             </Link>
@@ -21,11 +21,9 @@ export default function BookLayout({ children }: { children: React.ReactNode }) 
         </header>
 
         {/* Two-column body */}
-        <div className="flex-1 max-w-7xl mx-auto w-full px-6 py-10">
-          <div className="grid lg:grid-cols-[1fr_320px] gap-10 items-start">
-            {/* Left: page content */}
+        <div className="flex-1 max-w-5xl mx-auto w-full px-6 py-10">
+          <div className="grid lg:grid-cols-[1fr_300px] gap-10 items-start">
             <main className="min-w-0">{children}</main>
-            {/* Right: persistent summary */}
             <aside className="hidden lg:block">
               <BookingSummary />
             </aside>
@@ -37,33 +35,22 @@ export default function BookLayout({ children }: { children: React.ReactNode }) 
 }
 
 function StepRail() {
-  const steps = [
-    { label: "Hollow + Date", path: "/book" },
-    { label: "Your Details", path: "/book/confirm" },
-    { label: "Confirm", path: "/book/success" },
-  ];
-
+  const steps = ["Hollow + Date", "Your Details", "Confirm"];
   return (
-    <div className="hidden md:flex items-center gap-0">
-      {steps.map((step, i) => (
-        <StepNode key={step.label} index={i} label={step.label} total={steps.length} />
+    <div className="hidden sm:flex items-center gap-1.5">
+      {steps.map((label, i) => (
+        <div key={label} className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-border" />
+            <span className="text-[11px] uppercase tracking-wider text-muted-foreground whitespace-nowrap">
+              {label}
+            </span>
+          </div>
+          {i < steps.length - 1 && (
+            <div className="w-6 h-px bg-border mx-0.5" />
+          )}
+        </div>
       ))}
-    </div>
-  );
-}
-
-function StepNode({ index, label, total }: { index: number; label: string; total: number }) {
-  return (
-    <div className="flex items-center">
-      <div className="flex flex-col items-center gap-1.5">
-        <div className="w-2 h-2 rounded-full border border-muted-text/40 bg-transparent" />
-        <span className="font-mono text-[9px] uppercase tracking-widest text-muted-text whitespace-nowrap">
-          {label}
-        </span>
-      </div>
-      {index < total - 1 && (
-        <div className="w-12 h-px bg-gradient-to-r from-muted-text/20 to-muted-text/10 mb-4 mx-1" />
-      )}
     </div>
   );
 }

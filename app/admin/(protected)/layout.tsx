@@ -11,14 +11,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!user) redirect("/admin/login");
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-surface-1 border-b border-border/50 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <span className="font-display text-xl tracking-widest text-text-primary">
+    <div className="dark min-h-screen bg-background">
+      <header className="bg-card border-b border-border sticky top-0 z-10">
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-7">
+            <span className="font-display text-xl tracking-widest text-foreground">
               {BUSINESS_NAME}
             </span>
-            <nav className="flex gap-1">
+            <nav className="flex gap-0.5">
               <AdminNavLink href="/admin/dashboard">Bookings</AdminNavLink>
               <AdminNavLink href="/admin/windows">Windows</AdminNavLink>
             </nav>
@@ -26,7 +26,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <AdminSignOutButton />
         </div>
       </header>
-      <main className="max-w-7xl mx-auto px-6 py-10">
+      <main className="max-w-5xl mx-auto px-6 py-10">
         {children}
       </main>
     </div>
@@ -37,7 +37,7 @@ function AdminNavLink({ href, children }: { href: string; children: React.ReactN
   return (
     <Link
       href={href}
-      className="font-mono text-[11px] uppercase tracking-widest text-muted-text hover:text-text-primary hover:bg-surface-2 px-3 py-1.5 rounded-lg transition-all duration-200"
+      className="text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-secondary px-3 py-1.5 rounded-lg transition-all duration-150"
     >
       {children}
     </Link>

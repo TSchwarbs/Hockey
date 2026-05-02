@@ -19,7 +19,7 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
   today.setHours(0, 0, 0, 0);
 
   const [year, setYear] = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth()); // 0-indexed
+  const [month, setMonth] = useState(today.getMonth());
 
   const windowsByDate = useMemo(() => {
     const map: Record<string, DropOffWindow> = {};
@@ -53,35 +53,35 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
   })();
 
   return (
-    <div className="bg-surface-1 rounded-2xl border border-border/60 p-5">
+    <div className="bg-card rounded-xl border border-border p-5">
       {/* Month header */}
       <div className="flex items-center justify-between mb-5">
         <button
           onClick={prevMonth}
           disabled={!canGoPrev}
           aria-label="Previous month"
-          className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-text hover:text-text-primary hover:bg-surface-2 transition-all duration-200 disabled:opacity-20 disabled:pointer-events-none cursor-pointer"
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-150 disabled:opacity-25 disabled:pointer-events-none cursor-pointer"
         >
           <ChevronLeft />
         </button>
-        <span className="font-display text-[22px] uppercase tracking-widest text-text-primary">
+        <span className="font-semibold text-sm text-foreground">
           {MONTHS[month]} {year}
         </span>
         <button
           onClick={nextMonth}
           aria-label="Next month"
-          className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-text hover:text-text-primary hover:bg-surface-2 transition-all duration-200 cursor-pointer"
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-150 cursor-pointer"
         >
           <ChevronRight />
         </button>
       </div>
 
       {/* Day labels */}
-      <div className="grid grid-cols-7 mb-2">
+      <div className="grid grid-cols-7 mb-1">
         {DAYS.map((d) => (
           <div
             key={d}
-            className="h-8 flex items-center justify-center font-mono text-[10px] uppercase tracking-widest text-muted-text"
+            className="h-8 flex items-center justify-center text-[11px] uppercase tracking-wider text-muted-foreground"
           >
             {d}
           </div>
@@ -90,7 +90,6 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
 
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-y-1">
-        {/* Empty cells before first day */}
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} />
         ))}
@@ -108,7 +107,7 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
             return (
               <div
                 key={day}
-                className="h-9 flex items-center justify-center text-sm text-muted-text/30 line-through font-mono select-none"
+                className="h-9 flex items-center justify-center text-sm text-muted-foreground/30 line-through select-none"
               >
                 {day}
               </div>
@@ -120,11 +119,10 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
               <button
                 key={day}
                 onClick={() => onSelect(win)}
-                className="h-9 rounded-lg flex items-center justify-center text-sm font-mono font-medium text-text-primary bg-ice/10 border border-ice/30 hover:bg-ice/20 hover:border-ice/60 hover:text-ice transition-all duration-200 cursor-pointer relative group"
+                className="h-9 rounded-lg flex items-center justify-center text-sm font-medium text-primary bg-primary/10 border border-primary/25 hover:bg-primary/20 hover:border-primary/50 transition-all duration-150 cursor-pointer"
                 title={dateStr}
               >
                 {day}
-                <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-ice opacity-70 group-hover:opacity-100" />
               </button>
             );
           }
@@ -132,10 +130,10 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
           return (
             <div
               key={day}
-              className={`h-9 flex items-center justify-center text-sm font-mono select-none ${
+              className={`h-9 flex items-center justify-center text-sm select-none ${
                 isToday
-                  ? "text-steel font-medium"
-                  : "text-muted-text/50"
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground/45"
               }`}
             >
               {day}
@@ -145,14 +143,14 @@ export default function CalendarPicker({ windows, onSelect }: Props) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border/40">
+      <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-sm bg-ice/10 border border-ice/30" />
-          <span className="font-mono text-[10px] text-muted-text uppercase tracking-widest">Available</span>
+          <div className="w-3 h-3 rounded-sm bg-primary/10 border border-primary/25" />
+          <span className="text-[11px] text-muted-foreground uppercase tracking-wider">Available</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-sm bg-surface-2" />
-          <span className="font-mono text-[10px] text-muted-text uppercase tracking-widest">Unavailable</span>
+          <div className="w-3 h-3 rounded-sm bg-secondary border border-border" />
+          <span className="text-[11px] text-muted-foreground uppercase tracking-wider">Unavailable</span>
         </div>
       </div>
     </div>
