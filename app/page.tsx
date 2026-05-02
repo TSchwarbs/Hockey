@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { BUSINESS_NAME, DROP_BOX_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, HOLLOW_OPTIONS } from "@/lib/constants";
 
@@ -22,12 +23,29 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* ── Hero ────────────────────────────────────────────────── */}
         <section className="relative min-h-screen flex items-center overflow-hidden grain-overlay">
-          {/* Diagonal background split */}
+          {/* Hero photo */}
+          <Image
+            src="/images/hero/hockey_player.avif"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center"
+          />
+
+          {/* Directional overlay — deep on the left where text lives, opens up on the right */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(118deg, #080C10 0%, #080C10 54%, #0F1923 54%, #0F1923 100%)",
+                "linear-gradient(100deg, rgba(8,12,16,0.92) 0%, rgba(8,12,16,0.72) 45%, rgba(8,12,16,0.35) 100%)",
+            }}
+          />
+
+          {/* Bottom vignette so the scroll hint stays legible */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+            style={{
+              background: "linear-gradient(to top, rgba(8,12,16,0.6) 0%, transparent 100%)",
             }}
           />
 
@@ -39,16 +57,6 @@ export default function LandingPage() {
                 "radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 65%)",
             }}
           />
-
-          {/* Blade graphic — right side */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-center pointer-events-none select-none">
-            <BladeSVG />
-          </div>
-
-          {/* Ice crystals — bottom right corner */}
-          <div className="absolute bottom-10 right-10 pointer-events-none select-none opacity-20">
-            <IceCrystals />
-          </div>
 
           {/* Hero content */}
           <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-24">
@@ -265,123 +273,5 @@ function HollowCard({
         <p className="text-muted-text text-sm leading-relaxed">{option.description}</p>
       </div>
     </div>
-  );
-}
-
-function BladeSVG() {
-  return (
-    <svg
-      viewBox="0 0 480 700"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full max-w-md h-auto opacity-80"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id="blade-body" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#080C10" />
-          <stop offset="40%" stopColor="#162232" />
-          <stop offset="100%" stopColor="#00D4FF" stopOpacity="0.18" />
-        </linearGradient>
-        <linearGradient id="blade-edge" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#00D4FF" stopOpacity="0" />
-          <stop offset="30%" stopColor="#00D4FF" stopOpacity="0.9" />
-          <stop offset="70%" stopColor="#00D4FF" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#00D4FF" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="blade-glow" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" stopColor="#00D4FF" stopOpacity="0" />
-          <stop offset="50%" stopColor="#00D4FF" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#00D4FF" stopOpacity="0" />
-        </linearGradient>
-        <filter id="blade-blur">
-          <feGaussianBlur stdDeviation="8" />
-        </filter>
-      </defs>
-
-      {/* Glow halo behind blade */}
-      <ellipse cx="280" cy="350" rx="120" ry="280" fill="url(#blade-glow)" filter="url(#blade-blur)" />
-
-      {/* Main blade body */}
-      <path
-        d="M160 80 L380 140 L400 590 L140 560 Z"
-        fill="url(#blade-body)"
-        opacity="0.7"
-      />
-
-      {/* Right edge — the sharp edge */}
-      <line x1="388" y1="148" x2="398" y2="582" stroke="url(#blade-edge)" strokeWidth="2.5" />
-
-      {/* Left edge */}
-      <line x1="152" y1="94" x2="143" y2="566" stroke="#C0D9E8" strokeWidth="1" opacity="0.25" />
-
-      {/* Cross-section lines for depth/precision feel */}
-      {[160, 220, 280, 340, 400, 460, 520].map((y, i) => {
-        const progress = i / 6;
-        const x1 = 152 + progress * 10;
-        const x2 = 388 + progress * 8;
-        return (
-          <line
-            key={y}
-            x1={x1} y1={y}
-            x2={x2} y2={y + 5}
-            stroke="#C0D9E8"
-            strokeWidth="0.5"
-            opacity={0.08 + progress * 0.04}
-          />
-        );
-      })}
-
-      {/* Hollow groove at bottom — the curve */}
-      <path
-        d="M148 555 Q270 600 396 576"
-        stroke="#00D4FF"
-        strokeWidth="1.5"
-        strokeDasharray="5 4"
-        opacity="0.5"
-      />
-
-      {/* Edge highlight sparkle dots */}
-      <circle cx="393" cy="280" r="2.5" fill="#00D4FF" opacity="0.9" />
-      <circle cx="395" cy="350" r="1.8" fill="#00D4FF" opacity="0.7" />
-      <circle cx="396" cy="440" r="2" fill="#00D4FF" opacity="0.8" />
-
-      {/* Top geometry — mounting screws visual */}
-      <rect x="195" y="92" width="6" height="6" rx="3" fill="#C0D9E8" opacity="0.4" transform="rotate(-8 195 92)" />
-      <rect x="310" y="118" width="6" height="6" rx="3" fill="#C0D9E8" opacity="0.4" transform="rotate(-8 310 118)" />
-
-      {/* Grid lines — technical aesthetic */}
-      <line x1="100" y1="350" x2="420" y2="350" stroke="#00D4FF" strokeWidth="0.5" opacity="0.08" strokeDasharray="3 6" />
-      <line x1="270" y1="50" x2="270" y2="650" stroke="#00D4FF" strokeWidth="0.5" opacity="0.06" strokeDasharray="3 6" />
-    </svg>
-  );
-}
-
-function IceCrystals() {
-  return (
-    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-40 h-40" aria-hidden>
-      {/* Hexagonal crystal pattern */}
-      <line x1="100" y1="10" x2="100" y2="190" stroke="#00D4FF" strokeWidth="1" />
-      <line x1="10" y1="100" x2="190" y2="100" stroke="#00D4FF" strokeWidth="1" />
-      <line x1="29" y1="29" x2="171" y2="171" stroke="#00D4FF" strokeWidth="1" />
-      <line x1="171" y1="29" x2="29" y2="171" stroke="#00D4FF" strokeWidth="1" />
-
-      {/* Tick marks on each arm */}
-      {[40, 60, 80, 120, 140, 160].map((pos) => (
-        <g key={pos}>
-          <line x1={pos} y1="96" x2={pos} y2="104" stroke="#00D4FF" strokeWidth="1.5" />
-          <line x1="96" y1={pos} x2="104" y2={pos} stroke="#00D4FF" strokeWidth="1.5" />
-        </g>
-      ))}
-
-      {/* Center hexagon */}
-      <polygon
-        points="100,82 115,91 115,109 100,118 85,109 85,91"
-        stroke="#00D4FF"
-        strokeWidth="1"
-        fill="none"
-      />
-      <circle cx="100" cy="100" r="4" fill="#00D4FF" />
-    </svg>
   );
 }
