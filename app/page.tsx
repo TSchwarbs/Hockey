@@ -11,12 +11,6 @@ export default function LandingPage() {
           <span className="font-display text-xl tracking-widest text-foreground">
             {BUSINESS_NAME}
           </span>
-          <Link
-            href="/admin/dashboard"
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-150"
-          >
-            Admin
-          </Link>
         </div>
       </header>
 
